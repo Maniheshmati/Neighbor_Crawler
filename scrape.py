@@ -42,8 +42,14 @@ def scrape_data():
     elements = list(unique_elements)
 
     for element in elements:
-        # print(element)
-        cursor.execute("INSERT INTO neighbors(name, city_id) VALUES (?,?)", (element, 1))
+        # Check if the element is not already in the table to avoid duplicates
+        cursor.execute("SELECT name FROM neighbors WHERE name = ? AND city_id = ?", (element, 1))
+        existing_entry = cursor.fetchone()
+
+        if not existing_entry:
+            # If the entry doesn't exist, insert it
+            cursor.execute("INSERT INTO neighbors(name, city_id) VALUES (?, ?)", (element, 1))
+
     connection.commit()
 
 
