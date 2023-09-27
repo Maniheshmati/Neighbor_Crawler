@@ -27,7 +27,7 @@ def scrape_data():
     for _ in range(num_scrolls):
         # Scroll a little
         driver.execute_script("arguments[0].scrollTop += 100;", popup)
-        time.sleep(0.6)  # Adjust this sleep time as needed
+        time.sleep(0.2)  # Adjust this sleep time as needed
 
         # Collect the data
         new_data = driver.find_elements(By.CLASS_NAME, "kt-control-row__title")
@@ -53,4 +53,4 @@ def scrape_data():
     connection.commit()
 
 
-scrape_data()
+
